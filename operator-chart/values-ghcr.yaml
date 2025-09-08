@@ -1,0 +1,52 @@
+# Nirmata Kyverno Operator Values file for GHCR deployment
+# Updated to match chart's expected structure
+
+# Main Operator Image Configuration
+image:
+  repository: "ghcr.io/vikashkaushik01/nirmata-kyverno-operator"
+  tag: "v0.4.13"
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    registry: ghcr.io
+    name: ghcr-secret
+    create: false
+
+# Operator Configuration
+profile: "prod"
+enableWebhook: true
+secureOperator: true
+kyvernoDeployment: kyverno-admission-controller
+kyvernoNamespace: kyverno
+enablePolicyset: false
+preventPolicyTamper: true
+
+# RBAC Configuration
+rbac:
+  create: true
+  operatorHasAdminPerms: false
+  serviceAccount:
+    create: true
+    annotations: {}
+    name: ""
+
+# Pod Security Context
+securityContext:
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+# Container Security Context
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+    - CAP_NET_RAW
+  readOnlyRootFilesystem: true
+
+# Resources
+resources:
+  limits:
+    memory: 256Mi
+  requests:
+    memory: 256Mi
