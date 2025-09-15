@@ -15,7 +15,7 @@ global:
   # When set, it will override any values set under `imagePullSecrets` under different components across the chart.
   imagePullSecrets: []
 
-  kubectlImage: "ghcr.io/nirmata/kubectl:1.33.2"
+  kubectlImage: "ghcr.io/vikashkaushik01/kubectl:1.33.2"
 
   # -- Resync period for informers
   resyncPeriod: 15m
@@ -126,10 +126,10 @@ crds:
 
     image:
       # -- (string) Image registry
-      registry: ~
-      defaultRegistry: reg.nirmata.io
+      registry: ghcr.io/vikashkaushik01
+      defaultRegistry: ~
       # -- (string) Image repository
-      repository: nirmata/kyverno-cli
+      repository: kyverno-cli
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
@@ -506,7 +506,7 @@ webhooksCleanup:
     # -- (string) Image registry
     registry: ~
     # -- Image repository
-    repository: reg.nirmata.io/nirmata/kubectl
+    repository: ghcr.io/vikashkaushik01/kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
     tag: '1.32.1'
@@ -561,9 +561,9 @@ policyReportsCleanup:
 
   image:
     # -- (string) Image registry
-    registry: reg.nirmata.io
+    registry: ghcr.io/vikashkaushik01
     # -- Image repository
-    repository: nirmata/kubectl
+    repository: kubectl
     # -- Image tag
     # Defaults to `latest` if omitted
     tag: '1.31.1'
@@ -974,10 +974,10 @@ admissionController:
 
     image:
       # -- Image registry
-      registry: ~
-      defaultRegistry: reg.nirmata.io
+      registry: ghcr.io/vikashkaushik01
+      defaultRegistry: ~
       # -- Image repository
-      repository: nirmata/kyvernopre
+      repository: kyvernopre
       # -- (string) Image tag
       # If missing, defaults to image.tag
       tag: ~
@@ -1021,10 +1021,10 @@ admissionController:
 
     image:
       # -- Image registry
-      registry: ~
-      defaultRegistry: reg.nirmata.io
+      registry: ghcr.io/vikashkaushik01
+      defaultRegistry: ~
       # -- Image repository
-      repository: nirmata/kyverno
+      repository: kyverno
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
@@ -1239,10 +1239,10 @@ backgroundController:
 
   image:
     # -- Image registry
-    registry: ~
-    defaultRegistry: reg.nirmata.io
+    registry: ghcr.io/vikashkaushik01
+    defaultRegistry: ~
     # -- Image repository
-    repository: nirmata/background-controller
+    repository: background-controller
     # -- Image tag
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
@@ -1506,10 +1506,10 @@ cleanupController:
 
   image:
     # -- Image registry
-    registry: ~
-    defaultRegistry: reg.nirmata.io
+    registry: ghcr.io/vikashkaushik01
+    defaultRegistry: ~
     # -- Image repository
-    repository: nirmata/cleanup-controller
+    repository: cleanup-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
@@ -1823,10 +1823,10 @@ reportsController:
 
   image:
     # -- Image registry
-    registry: ~
-    defaultRegistry: reg.nirmata.io
+    registry: ghcr.io/vikashkaushik01
+    defaultRegistry: ~
     # -- Image repository
-    repository: nirmata/reports-controller
+    repository: reports-controller
     # -- (string) Image tag
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
@@ -2107,9 +2107,9 @@ reports-server:
 
   image:
     # -- Image registry
-    registry: reg.nirmata.io
+    registry: ghcr.io/vikashkaushik01
     # -- Image repository
-    repository: nirmata/reports-server
+    repository: reports-server
     # -- Image pull policy
     pullPolicy: IfNotPresent
     # -- Image tag (will default to app version if not set)
@@ -2280,9 +2280,9 @@ reports-server:
     etcd:
       image:
         # -- Image registry
-        registry: ghcr.io
+        registry: ghcr.io/vikashkaushik01
         # -- Image repository
-        repository: nirmata/etcd
+        repository: etcd
         # -- Image tag
         tag: v3.5.18-cve-free
 
@@ -2400,9 +2400,9 @@ reports-server:
   jobConfigurations:
     image:
       # -- (string) Image registry
-      registry: ghcr.io
+      registry: ghcr.io/vikashkaushik01
       # -- Image repository
-      repository: nirmata/kubectl
+      repository: kubectl
       # -- Image tag
       # Defaults to `latest` if omitted
       tag: '1.30.2'

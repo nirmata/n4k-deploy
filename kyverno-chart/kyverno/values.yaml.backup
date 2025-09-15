@@ -1,0 +1,86 @@
+# N4K Values file for Enterprise deployment with private registry
+
+# Policy Exceptions Configuration
+features:
+  policyExceptions:
+    namespace: "*"
+    enabled: true
+
+# Global Configuration
+global:
+  # Global image pull secrets
+  imagePullSecrets:
+    - name: artifactory-secret
+  
+  # Disable global registry to avoid path conflicts
+  image:
+    registry: ~
+
+# Admission Controller Configuration
+admissionController:
+  image:
+    registry: ~
+    defaultRegistry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kyverno
+    tag: v1.13.6-n4k.nirmata.10
+    pullPolicy: IfNotPresent
+  
+  initContainer:
+    image:
+      registry: ~
+      defaultRegistry: ~
+      repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kyvernopre
+      tag: v1.13.6-n4k.nirmata.10
+      pullPolicy: IfNotPresent
+
+# Background Controller Configuration  
+backgroundController:
+  image:
+    registry: ~
+    defaultRegistry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/background-controller
+    tag: v1.13.6-n4k.nirmata.10
+    pullPolicy: IfNotPresent
+
+# Cleanup Controller Configuration
+cleanupController:
+  image:
+    registry: ~
+    defaultRegistry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/cleanup-controller
+    tag: v1.13.6-n4k.nirmata.10
+    pullPolicy: IfNotPresent
+
+# Reports Controller Configuration
+reportsController:
+  image:
+    registry: ~
+    defaultRegistry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/reports-controller
+    tag: v1.13.6-n4k.nirmata.10
+    pullPolicy: IfNotPresent
+
+# CLI Image Configuration (used in hooks)
+cli:
+  image:
+    registry: ~
+    defaultRegistry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kyverno-cli
+    tag: v1.13.6-n4k.nirmata.10
+    pullPolicy: IfNotPresent
+
+# Test Configuration
+test:
+  image:
+    registry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/busybox
+    tag: "1.35"
+    pullPolicy: IfNotPresent
+
+# Hooks Configuration
+hooks:
+  image:
+    registry: ~
+    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kubectl
+    tag: "1.32.1"
+    pullPolicy: IfNotPresent

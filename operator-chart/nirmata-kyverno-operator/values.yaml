@@ -17,7 +17,7 @@ replicaCount: 1
 envVars: []
 
 image:
-  repository: ghcr.io/nirmata/nirmata-kyverno-operator
+  repository: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
   # Defaults to chart appVersion
   tag:
   pullPolicy: IfNotPresent
@@ -100,7 +100,7 @@ kyverno:
           - watch
   templating:
     enabled: false
-    image: ghcr.io/nirmata/kubectl:1.33.2
+    image: ghcr.io/vikashkaushik01/kubectl:1.33.2
     version: ~
   customNamespaces: false
   webhooksCleanup:
@@ -112,9 +112,9 @@ kyverno:
       enabled: true
       image:
         # -- (string) Image registry
-        registry: ghcr.io
+        registry: ghcr.io/vikashkaushik01
         # -- (string) Image repository
-        repository: nirmata/kyverno-cli
+        repository: kyverno-cli
   #   groups:
   #     kyverno:
   #       admissionreports: true
@@ -270,7 +270,7 @@ kyverno:
       enabled: false
       image:
         registry: ~
-        repository: ghcr.io/nirmata/kubectl
+        repository: ghcr.io/vikashkaushik01/kubectl
         tag: '1.31.1'
         pullPolicy: ~
       podSecurityContext: {}
@@ -292,7 +292,7 @@ kyverno:
       imageTag: 0.1.17
     webhooksCleanup:
       enabled: false
-      image: ghcr.io/nirmata/kubectl:1.31.1
+      image: ghcr.io/vikashkaushik01/kubectl:1.31.1
     cleanupJobs:
       admissionReports:
         image:
@@ -311,7 +311,7 @@ awsAdapter:
   namespace: kyverno-aws-adapter
   replicas: 1
   image:
-    repository: ghcr.io/nirmata/kyverno-aws-adapter
+    repository: ghcr.io/vikashkaushik01/kyverno-aws-adapter
     tag: v0.3.0
   rbac:
     create: false
@@ -330,7 +330,7 @@ imageScanAdapter:
   namespace: image-scan-adapter
   replicas: 1
   image:
-    repository: ghcr.io/nirmata/image-scan-adapter
+    repository: ghcr.io/vikashkaushik01/image-scan-adapter
     tag: v0.1.0
   rbac:
     create: false
@@ -345,7 +345,7 @@ cisAdapter:
   namespace: cis-adapter
   replicas: 1
   image:
-    repository: ghcr.io/nirmata/kube-bench-adapter
+    repository: ghcr.io/vikashkaushik01/kube-bench-adapter
     tag: v0.2.1
   rbac:
     create: false
@@ -494,9 +494,9 @@ crds:
 
     image:
       # -- (string) Image registry
-      registry: ghcr.io
+      registry: ghcr.io/vikashkaushik01
       # -- (string) Image repository
-      repository: nirmata/kyverno-cli
+      repository: kyverno-cli
       # -- (string) Image tag
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
