@@ -135,7 +135,7 @@ crds:
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
       # -- (string) Image pull policy
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     # -- Image pull secrets
     imagePullSecrets: []
@@ -1031,7 +1031,7 @@ admissionController:
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
       # -- Image pull policy
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     resources:
       # -- Pod resource limits
@@ -1249,7 +1249,7 @@ backgroundController:
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
     # -- Image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   # -- Image pull secrets
   imagePullSecrets: []
@@ -1516,7 +1516,7 @@ cleanupController:
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
     # -- Image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   # -- Image pull secrets
   imagePullSecrets: []
@@ -1833,7 +1833,7 @@ reportsController:
     # Defaults to appVersion in Chart.yaml if omitted
     tag: ~
     # -- Image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   # -- Image pull secrets
   imagePullSecrets: []
@@ -2113,7 +2113,7 @@ reports-server:
     # -- Image repository
     repository: reports-server
     # -- Image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
     # -- Image tag (will default to app version if not set)
     tag: ~
 

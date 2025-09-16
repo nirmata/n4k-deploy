@@ -20,7 +20,7 @@ image:
   repository: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
   # Defaults to chart appVersion
   tag:
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   pullSecrets:
     registry: ghcr.io
     name: ghcr-secret
@@ -501,7 +501,7 @@ crds:
       # Defaults to appVersion in Chart.yaml if omitted
       tag: ~
       # -- (string) Image pull policy
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     # -- Image pull secrets
     imagePullSecrets: []
