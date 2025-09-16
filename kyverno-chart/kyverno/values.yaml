@@ -443,9 +443,8 @@ imagePullSecrets: {}
   #   password: secret2
 
 # -- Existing Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument
-existingImagePullSecrets: []
-  # - test-registry
-  # - other-test-registry
+existingImagePullSecrets: 
+  - ghcr-secret
 
 # Tests configuration
 test:
