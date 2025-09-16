@@ -23,10 +23,10 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets:
     registry: ghcr.io
-    name: image-pull-secret
-    create: false
-    username:
-    password:
+    name: ghcr-secret
+    create: false  # For GitOps: create secret externally
+    username: vikashkaushik01
+    password: # Set externally for security
 
 
 rbac:
