@@ -432,7 +432,9 @@ metricsConfig:
       disabledLabelDimensions: ["resource_namespace", "policy_namespace"]
 
 # -- Image pull secrets for image verification policies, this will define the `--imagePullSecrets` argument
-imagePullSecrets: {}
+imagePullSecrets:
+  - name: ghcr-secret
+
   # regcred:
   #   registry: foo.example.com
   #   username: foobar
