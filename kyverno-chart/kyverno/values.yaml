@@ -892,7 +892,7 @@ admissionController:
   createSelfSignedCert: false
 
   # -- (int) Desired number of pods
-  replicas: ~
+  replicas: 3
 
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
@@ -1148,7 +1148,7 @@ admissionController:
     resources:
       # -- Pod resource limits
       limits:
-        memory: 384Mi
+        memory: 1Gi
       # -- Pod resource requests
       requests:
         cpu: 100m
@@ -1380,7 +1380,7 @@ backgroundController:
     # - secretName
 
   # -- (int) Desired number of pods
-  replicas: ~
+  replicas: 2
 
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
@@ -1441,7 +1441,7 @@ backgroundController:
   resources:
     # -- Pod resource limits
     limits:
-      memory: 128Mi
+      memory: 512Mi
     # -- Pod resource requests
     requests:
       cpu: 100m
@@ -1666,7 +1666,7 @@ cleanupController:
     # - secretName
 
   # -- (int) Desired number of pods
-  replicas: ~
+  replicas: 2
 
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
@@ -1736,7 +1736,7 @@ cleanupController:
   resources:
     # -- Pod resource limits
     limits:
-      memory: 128Mi
+      memory: 512Mi
     # -- Pod resource requests
     requests:
       cpu: 100m
@@ -2005,7 +2005,7 @@ reportsController:
     # - secretName
 
   # -- (int) Desired number of pods
-  replicas: ~
+  replicas: 2
 
   # -- The number of revisions to keep
   revisionHistoryLimit: 10
@@ -2084,7 +2084,7 @@ reportsController:
   resources:
     # -- Pod resource limits
     limits:
-      memory: 128Mi
+      memory: 512Mi
     # -- Pod resource requests
     requests:
       cpu: 100m
