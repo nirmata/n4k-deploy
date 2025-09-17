@@ -605,6 +605,11 @@ policyReportsCleanup:
       type: RuntimeDefault
 
 
+# Reports server subchart configuration
+reports-server:
+  # -- Disable reports-server subchart installation
+  install: false
+
 webhooksCleanup:
   # -- Create a helm pre-delete hook to cleanup webhooks.
   enabled: true
