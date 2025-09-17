@@ -186,5 +186,3 @@ echo "• Operator removed"
 echo "• Webhooks and policy reports cleaned up"
 echo "• Cluster is ready for fresh deployment if needed"
 echo ""
-
-

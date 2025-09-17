@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# N4K Deployment Script
-# This script deploys both the operator and N4K components using custom registry images
+# N4K Deployment Script for Enterprise Environment
+# This script deploys both the operator and N4K components using enterprise private registry
 
 set -e
 
-echo "🚀 N4K Deployment with Custom Registry Images"
-echo "=============================================="
+echo "🚀 N4K Enterprise Deployment"
+echo "============================="
+echo "Using enterprise private registry configuration"
 echo ""
 
 # Configuration
@@ -18,6 +19,7 @@ TIMEOUT="300s"
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 print_status() {
@@ -30,6 +32,10 @@ print_warning() {
 
 print_error() {
     echo -e "${RED}❌ $1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ️  $1${NC}"
 }
 
 # Function to check if a command exists
@@ -47,12 +53,6 @@ check_command "kubectl"
 print_status "All prerequisites found"
 echo ""
 
-# Check if values files exist
-if [ ! -f "operator-chart/values-ghcr.yaml" ] || [ ! -f "kyverno-chart/values-ghcr.yaml" ]; then
-    print_error "Custom values files not found. Please ensure values-ghcr.yaml files exist in chart directories."
-    exit 1
-fi
-
 # Check kubectl connectivity
 if ! kubectl cluster-info &> /dev/null; then
     print_error "Cannot connect to Kubernetes cluster. Please check your kubectl configuration."
@@ -62,17 +62,48 @@ fi
 print_status "Connected to Kubernetes cluster"
 echo ""
 
+# Create image pull secret for enterprise registry
+echo "🔐 Setting up registry credentials..."
+echo "===================================="
+
+print_info "Creating image pull secrets for enterprise registry"
+print_warning "You'll need registry credentials for the configured private registry"
+
+# Prompt for credentials
+read -p "Enter registry username: " REGISTRY_USER
+read -s -p "Enter registry password/token: " REGISTRY_PASS
+echo ""
+
+# Extract registry from the first image in kyverno values
+REGISTRY_URL=$(grep -m1 "repository:" kyverno-chart/kyverno/values.yaml | sed 's/.*repository: //' | sed 's|/.*||')
+print_info "Using registry: ${REGISTRY_URL}"
+
+# Create secrets in both namespaces
+kubectl create namespace ${OPERATOR_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+kubectl create namespace ${KYVERNO_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+
+kubectl create secret docker-registry registry-secret \
+  --docker-server="${REGISTRY_URL}" \
+  --docker-username="${REGISTRY_USER}" \
+  --docker-password="${REGISTRY_PASS}" \
+  -n ${OPERATOR_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+
+kubectl create secret docker-registry registry-secret \
+  --docker-server="${REGISTRY_URL}" \
+  --docker-username="${REGISTRY_USER}" \
+  --docker-password="${REGISTRY_PASS}" \
+  -n ${KYVERNO_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
+
+print_status "Image pull secrets created"
+echo ""
+
 # Deploy Operator
 echo "🔧 Step 1: Deploying Nirmata Kyverno Operator..."
 echo "================================================="
 
-# Create namespace if it doesn't exist
-kubectl create namespace ${OPERATOR_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
-
 # Deploy operator
 helm install nirmata-kyverno-operator ./operator-chart/nirmata-kyverno-operator \
     -n ${OPERATOR_NAMESPACE} \
-    -f operator-chart/values-ghcr.yaml \
     --wait --timeout=${TIMEOUT}
 
 if [ $? -eq 0 ]; then
@@ -95,13 +126,9 @@ echo ""
 echo "🔧 Step 2: Deploying N4K (Kyverno)..."
 echo "====================================="
 
-# Create namespace if it doesn't exist
-kubectl create namespace ${KYVERNO_NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
-
 # Deploy N4K
 helm install kyverno ./kyverno-chart/kyverno \
     -n ${KYVERNO_NAMESPACE} \
-    -f kyverno-chart/values-ghcr.yaml \
     --wait --timeout=600s
 
 if [ $? -eq 0 ]; then
@@ -136,19 +163,21 @@ echo ""
 print_status "Deployment verification complete!"
 echo ""
 
-echo "🎉 N4K Deployment Successful!"
-echo "=============================="
+echo "🎉 Enterprise N4K Deployment Successful!"
+echo "========================================"
 echo ""
 echo "📋 Summary:"
 echo "• Operator: nirmata-kyverno-operator running in ${OPERATOR_NAMESPACE}"
 echo "• N4K: All components running in ${KYVERNO_NAMESPACE}"
+echo "• Registry: ${REGISTRY_URL}"
 echo "• Policy Exceptions: Enabled for all namespaces"
-echo "• Custom Registry: Images pulled from your private registry"
+echo "• Image Pull Secrets: registry-secret configured"
 echo ""
-echo "🚀 Your N4K deployment is ready for use!"
+echo "🚀 Your Enterprise N4K deployment is ready for use!"
 echo ""
 echo "📖 Next Steps:"
-echo "• Test policy validation with sample policies"
+echo "• Test policy validation with enterprise-specific policies"
 echo "• Configure monitoring and alerting"
 echo "• Review security policies and exceptions"
+echo "• Set up backup and disaster recovery procedures"
 echo ""
