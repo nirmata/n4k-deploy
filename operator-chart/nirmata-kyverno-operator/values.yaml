@@ -17,13 +17,13 @@ replicaCount: 1
 envVars: []
 
 image:
-  repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata-kyverno-operator
+  repository: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
   # Defaults to chart appVersion
   tag:
   pullPolicy: Always
   pullSecrets:
-    registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata
-    name: artifactory-secret
+    registry: ghcr.io/vikashkaushik01
+    name: ghcr-secret
     create: false  # For GitOps: create secret externally
     username: vikashkaushik01
     password: # Set externally for security
@@ -100,7 +100,7 @@ kyverno:
           - watch
   templating:
     enabled: false
-    image: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kubectl:1.33.2
+    image: ghcr.io/vikashkaushik01/kubectl:1.33.2
     version: ~
   customNamespaces: false
   webhooksCleanup:
@@ -112,7 +112,7 @@ kyverno:
       enabled: true
       image:
         # -- (string) Image registry
-        registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/vikashkaushik01
+        registry: ghcr.io/vikashkaushik01/vikashkaushik01
         # -- (string) Image repository
         repository: kyverno-cli
   #   groups:
@@ -246,7 +246,7 @@ kyverno:
   generatecontrollerExtraResources: []
   image:
     # -- Image repository
-    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata
+    repository: ghcr.io/vikashkaushik01
     # -- Image tag
     tag: v1.12.6-n4k.nirmata.2
 
@@ -270,7 +270,7 @@ kyverno:
       enabled: false
       image:
         registry: ~
-        repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kubectl
+        repository: ghcr.io/vikashkaushik01/kubectl
         tag: '1.31.1'
         pullPolicy: ~
       podSecurityContext: {}
@@ -292,7 +292,7 @@ kyverno:
       imageTag: 0.1.17
     webhooksCleanup:
       enabled: false
-      image: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kubectl:1.31.1
+      image: ghcr.io/vikashkaushik01/kubectl:1.31.1
     cleanupJobs:
       admissionReports:
         image:
@@ -311,7 +311,7 @@ awsAdapter:
   namespace: kyverno-aws-adapter
   replicas: 1
   image:
-    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kyverno-aws-adapter
+    repository: ghcr.io/vikashkaushik01/kyverno-aws-adapter
     tag: v0.3.0
   rbac:
     create: false
@@ -330,7 +330,7 @@ imageScanAdapter:
   namespace: image-scan-adapter
   replicas: 1
   image:
-    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/image-scan-adapter
+    repository: ghcr.io/vikashkaushik01/image-scan-adapter
     tag: v0.1.0
   rbac:
     create: false
@@ -345,7 +345,7 @@ cisAdapter:
   namespace: cis-adapter
   replicas: 1
   image:
-    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/kube-bench-adapter
+    repository: ghcr.io/vikashkaushik01/kube-bench-adapter
     tag: v0.2.1
   rbac:
     create: false
@@ -494,7 +494,7 @@ crds:
 
     image:
       # -- (string) Image registry
-      registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata/vikashkaushik01
+      registry: ghcr.io/vikashkaushik01/vikashkaushik01
       # -- (string) Image repository
       repository: kyverno-cli
       # -- (string) Image tag
