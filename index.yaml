@@ -20,7 +20,7 @@ entries:
       artifacthub.io/prerelease: "false"
     apiVersion: v2
     appVersion: v1.13.6-n4k.nirmata.10
-    created: "2025-09-17T09:04:38.243531+05:30"
+    created: "2025-09-17T09:36:20.415567+05:30"
     dependencies:
     - condition: grafana.enabled
       name: grafana
@@ -35,7 +35,7 @@ entries:
       repository: ""
       version: 3.3.6
     description: Kubernetes Native Policy Management
-    digest: 930c17cd9e0cb50c8da6078e6937e36689535e4e5fb3c81c3dc222019e127339
+    digest: 8193e1fec14dad6d40296d2352004b03cbc50393d98b4113f9a8538c6a4a7013
     home: https://kyverno.io/
     icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
     keywords:
@@ -65,14 +65,14 @@ entries:
   nirmata-kyverno-operator:
   - apiVersion: v2
     appVersion: v0.4.13
-    created: "2025-09-17T09:04:38.245712+05:30"
+    created: "2025-09-17T09:36:20.418698+05:30"
     dependencies:
     - condition: crds.install
       name: crds
       repository: ""
       version: 3.2.2
     description: Helm Chart for Enterprise Kyverno Operator
-    digest: 3cce97917f59737203654cf572e940a2db3db0bb87c8b937c7c9c86d71bff8ad
+    digest: 6f3a422daee67318a468f24d70bece8a430d7c776e6cc8efb265f5ff87586f04
     home: https://kyverno.io/
     icon: https://github.com/kyverno/kyverno/raw/main/img/logo.png
     keywords:
@@ -89,4 +89,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/nirmata/n4k-deploy/main/nirmata-kyverno-operator-0.8.8.tgz
     version: 0.8.8
-generated: "2025-09-17T09:04:38.227633+05:30"
+generated: "2025-09-17T09:36:20.401381+05:30"
