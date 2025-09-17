@@ -726,7 +726,7 @@ features:
     enabled: true
   validatingAdmissionPolicyReports:
     # -- Enables the feature
-    enabled: true
+    enabled: false
   mutatingAdmissionPolicyReports:
     # -- Enables the feature
     enabled: false
@@ -770,7 +770,7 @@ features:
     enabled: false
   generateValidatingAdmissionPolicy:
     # -- Enables the feature
-    enabled: true
+    enabled: false
   generateMutatingAdmissionPolicy:
     # -- Enables the feature
     enabled: false
