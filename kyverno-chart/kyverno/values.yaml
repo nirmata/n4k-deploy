@@ -10,11 +10,11 @@ global:
   image:
     # -- (string) Global value that allows to set a single image registry across all deployments.
     # When set, it will override any values set under `.image.registry` across the chart.
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
   # -- (list) Global list of Image pull secrets
   # When set, it will override any values set under `imagePullSecrets` under different components across the chart.
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
 
   # -- Resync period for informers
   resyncPeriod: 15m
@@ -149,7 +149,7 @@ crds:
 
     image:
       # -- (string) Image registry
-      registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+      registry: "ghcr.io/vikashkaushik01"
       defaultRegistry: ~
       # -- (string) Image repository
       repository: kyverno-cli
@@ -161,7 +161,7 @@ crds:
 
     # -- Image pull secrets
     imagePullSecrets:
-      - name: artifactory-secret
+      - name: ghcr-secret
     # - name: secretName
 
     # -- Security context for the pod
@@ -496,7 +496,7 @@ test:
 
   image:
     # -- (string) Image registry
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
     # -- Image repository
     repository: busybox
     # -- Image tag
@@ -508,7 +508,7 @@ test:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
   # - name: secretName
 
   resources:
@@ -554,7 +554,7 @@ policyReportsCleanup:
   
   image:
     # -- Image registry
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
     # -- Image repository
     repository: kubectl
     # -- Image tag
@@ -564,7 +564,7 @@ policyReportsCleanup:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
 
   # -- Security context for the pod
   podSecurityContext: {}
@@ -632,7 +632,7 @@ webhooksCleanup:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
 
   # -- Security context for the pod
   podSecurityContext: {}
@@ -1081,14 +1081,14 @@ admissionController:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
     # - secretName
 
   initContainer:
 
     image:
       # -- Image registry
-      registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+      registry: "ghcr.io/vikashkaushik01"
       defaultRegistry: reg.kyverno.io
       # -- Image repository
       repository: kyvernopre
@@ -1135,7 +1135,7 @@ admissionController:
 
     image:
       # -- Image registry
-      registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+      registry: "ghcr.io/vikashkaushik01"
       defaultRegistry: reg.kyverno.io
       # -- Image repository
       repository: kyverno
@@ -1364,7 +1364,7 @@ backgroundController:
 
   image:
     # -- Image registry
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
     defaultRegistry: reg.kyverno.io
     # -- Image repository
     repository: background-controller
@@ -1376,7 +1376,7 @@ backgroundController:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
     # - secretName
 
   # -- (int) Desired number of pods
@@ -1650,7 +1650,7 @@ cleanupController:
 
   image:
     # -- Image registry
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
     defaultRegistry: reg.kyverno.io
     # -- Image repository
     repository: cleanup-controller
@@ -1662,7 +1662,7 @@ cleanupController:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
     # - secretName
 
   # -- (int) Desired number of pods
@@ -1989,7 +1989,7 @@ reportsController:
 
   image:
     # -- Image registry
-    registry: "artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker/nirmata"
+    registry: "ghcr.io/vikashkaushik01"
     defaultRegistry: reg.kyverno.io
     # -- Image repository
     repository: reports-controller
@@ -2001,7 +2001,7 @@ reportsController:
 
   # -- Image pull secrets
   imagePullSecrets:
-    - name: artifactory-secret
+    - name: ghcr-secret
     # - secretName
 
   # -- (int) Desired number of pods
