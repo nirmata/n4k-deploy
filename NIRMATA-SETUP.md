@@ -22,6 +22,21 @@ Password: <YOUR_GITHUB_PAT>
 
 ### Option 2: Customer Bitbucket Mirror
 
+#### For Novartis (Bitbucket Enterprise) - READY TO USE:
+**Repository already mirrored to:**
+```yaml
+Repository Name: novartis-n4k-charts
+Location: https://bitbucketenterprise.aws.novartis.net/projects/ZEP/repos/n4k-engine-nirmata/raw/nova/
+Username: NOVARTIS_BITBUCKET_USERNAME
+Password: NOVARTIS_BITBUCKET_PASSWORD
+```
+
+**Verify files are accessible:**
+- Index: `https://bitbucketenterprise.aws.novartis.net/projects/ZEP/repos/n4k-engine-nirmata/raw/nova/index.yaml`
+- Operator Chart: `https://bitbucketenterprise.aws.novartis.net/projects/ZEP/repos/n4k-engine-nirmata/raw/nova/nirmata-kyverno-operator-0.8.8.tgz`
+- Kyverno Chart: `https://bitbucketenterprise.aws.novartis.net/projects/ZEP/repos/n4k-engine-nirmata/raw/nova/kyverno-3.3.34.tgz`
+
+#### For Other Customers:
 **Customer Manual Steps:**
 1. Create Bitbucket repository
 2. Clone nova branch: `git clone -b nova https://github.com/nirmata/n4k-deploy.git`
@@ -145,6 +160,13 @@ kubectl get pods -n kyverno -o yaml | grep "image:" | head -5
 - Verify URL is accessible in browser
 - Check credentials (GitHub PAT or Bitbucket App Password)
 - Ensure repository is public or credentials have read access
+
+### Novartis Bitbucket Enterprise Specific
+- **Authentication**: Use Novartis Active Directory credentials or Bitbucket App Password
+- **Network**: Ensure Nirmata platform can access `bitbucketenterprise.aws.novartis.net`
+- **Test Access**: Verify you can access the raw files directly in browser:
+  - `https://bitbucketenterprise.aws.novartis.net/projects/ZEP/repos/n4k-engine-nirmata/raw/nova/index.yaml`
+- **Permissions**: Ensure your user has read access to ZEP project
 
 ### ImagePullBackOff Errors
 - Check secrets exist: `kubectl get secrets -n [namespace] | grep [secret-name]`
