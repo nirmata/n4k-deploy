@@ -416,6 +416,13 @@ config:
   # Items to include to config.resourceFilters
   resourceFiltersInclude: []
 
+  # -- Configuration for disabling auto webhook generation
+  disableAutoWebhookGeneration:
+    # -- Enable disabling auto webhook generation
+    enable: false
+    # -- List of webhooks to disable
+    webhooks: []
+
 # Metrics configuration
 metricsConfig:
 
@@ -539,6 +546,63 @@ test:
 
 # -- Additional labels
 customLabels: {}
+
+# Policy reports cleanup configuration
+policyReportsCleanup:
+  # -- Enable policy reports cleanup job
+  enabled: false
+  
+  image:
+    # -- Image registry
+    registry: "ghcr.io/vikashkaushik01"
+    # -- Image repository
+    repository: kubectl
+    # -- Image tag
+    tag: '1.31.1'
+    # -- Image pull policy
+    pullPolicy: Always
+
+  # -- Image pull secrets
+  imagePullSecrets:
+    - name: ghcr-secret
+
+  # -- Security context for the pod
+  podSecurityContext: {}
+
+  # -- Node labels for pod assignment
+  nodeSelector: {}
+
+  # -- List of node taints to tolerate
+  tolerations: []
+
+  # -- Pod anti affinity constraints.
+  podAntiAffinity: {}
+
+  # -- Pod affinity constraints.
+  podAffinity: {}
+
+  # -- Pod labels.
+  podLabels: {}
+
+  # -- Pod annotations.
+  podAnnotations: {}
+
+  # -- Node affinity constraints.
+  nodeAffinity: {}
+
+  # -- Security context for the containers
+  securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
 
 webhooksCleanup:
