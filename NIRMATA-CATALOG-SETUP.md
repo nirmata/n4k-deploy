@@ -141,10 +141,18 @@ When working correctly:
 - Deployments complete without secret size errors
 - All pods running with correct images from respective registries
 
+## 🏢 Customer Bitbucket Setup
+
+**For customers who can only access Bitbucket:**
+- See `BITBUCKET-CUSTOMER-SETUP.md` for complete Bitbucket integration guide
+- Use `setup-bitbucket-repo.sh` script to automate repository mirroring
+- Customer will use their own Bitbucket repository as Helm chart repository
+- URL format: `https://bitbucket.org/CUSTOMER_ORG/REPO_NAME/raw/nova/`
+
 ## 📞 Support
 
 If issues persist:
-- Check GitHub repository accessibility
-- Verify Helm chart package integrity
-- Confirm branch-specific configurations are correct
-- Use the alternative raw YAML approach documented in GITOPS-SOLUTION.md
+- **GitHub Setup**: Check repository accessibility and verify Helm chart package integrity
+- **Bitbucket Setup**: See BITBUCKET-CUSTOMER-SETUP.md for customer-specific instructions  
+- **Configuration**: Confirm branch-specific configurations are correct
+- **Alternatives**: Use the raw YAML approach documented in GITOPS-SOLUTION.md
