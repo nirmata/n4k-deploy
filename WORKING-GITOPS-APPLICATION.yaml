@@ -1,0 +1,33 @@
+# ===================================================================
+# WORKING GITOPS APPLICATION FOR NIRMATA-KYVERNO-OPERATOR
+# ===================================================================
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n4k-operator
+  namespace: argocd  # Change to your ArgoCD namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/n4k-deploy.git
+    targetRevision: main
+    path: nirmata-kyverno-operator
+    helm:
+      releaseName: n4k-operator  # CRITICAL: Explicit release name
+      values: |
+        image:
+          repository: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
+          tag: v0.4.13
+          pullPolicy: IfNotPresent
+        imagePullSecrets:
+          - name: ghcr-secret
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nirmata-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
