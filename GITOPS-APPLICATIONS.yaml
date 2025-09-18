@@ -1,0 +1,160 @@
+# ===================================================================
+# CORRECT GITOPS APPLICATIONS - FIXES ALL PREVIOUS ISSUES
+# ===================================================================
+
+---
+# OPERATOR APPLICATION - FIXED
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n4k-operator
+  namespace: argocd  # or your ArgoCD namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/n4k-deploy.git
+    targetRevision: main
+    path: nirmata-kyverno-operator  # FIXED: No double slash, clean path
+    helm:
+      releaseName: n4k-operator  # FIXED: Explicit release name
+      parameters:
+      - name: image.repository
+        value: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
+      - name: imagePullSecrets[0].name
+        value: ghcr-secret
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nirmata-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+---
+# KYVERNO APPLICATION - FIXED  
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno
+  namespace: argocd  # or your ArgoCD namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/n4k-deploy.git
+    targetRevision: main
+    path: kyverno  # FIXED: No double slash, clean path
+    helm:
+      releaseName: kyverno  # FIXED: Explicit release name
+      parameters:
+      - name: global.image.registry
+        value: ghcr.io/vikashkaushik01
+      - name: global.imagePullSecrets[0].name
+        value: ghcr-secret
+      - name: admission.replicas
+        value: "3"
+      - name: admission.container.resources.limits.memory
+        value: 1Gi
+      - name: backgroundController.replicas
+        value: "2"  
+      - name: backgroundController.container.resources.limits.memory
+        value: 512Mi
+      - name: cleanupController.replicas
+        value: "2"
+      - name: cleanupController.container.resources.limits.memory
+        value: 512Mi
+      - name: reportsController.replicas
+        value: "2"
+      - name: reportsController.container.resources.limits.memory
+        value: 512Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kyverno
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+
+# ===================================================================
+# ALTERNATIVE: HELM REPOSITORY APPROACH (MORE RELIABLE)
+# ===================================================================
+
+---
+# OPERATOR VIA HELM REPO - MOST RELIABLE
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n4k-operator-helm-repo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://nirmata.github.io/n4k-deploy
+    chart: nirmata-kyverno-operator
+    targetRevision: "0.8.8"
+    helm:
+      releaseName: n4k-operator
+      parameters:
+      - name: image.repository
+        value: ghcr.io/vikashkaushik01/nirmata-kyverno-operator
+      - name: imagePullSecrets[0].name
+        value: ghcr-secret
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nirmata-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+---
+# KYVERNO VIA HELM REPO - MOST RELIABLE
+apiVersion: argoproj.io/v1alpha1  
+kind: Application
+metadata:
+  name: kyverno-helm-repo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://nirmata.github.io/n4k-deploy
+    chart: kyverno
+    targetRevision: "3.3.34"
+    helm:
+      releaseName: kyverno
+      parameters:
+      - name: global.image.registry
+        value: ghcr.io/vikashkaushik01
+      - name: global.imagePullSecrets[0].name
+        value: ghcr-secret
+      - name: admission.replicas
+        value: "3"
+      - name: admission.container.resources.limits.memory
+        value: 1Gi
+      - name: backgroundController.replicas
+        value: "2"
+      - name: backgroundController.container.resources.limits.memory
+        value: 512Mi
+      - name: cleanupController.replicas
+        value: "2"
+      - name: cleanupController.container.resources.limits.memory
+        value: 512Mi
+      - name: reportsController.replicas
+        value: "2"
+      - name: reportsController.container.resources.limits.memory
+        value: 512Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kyverno
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
