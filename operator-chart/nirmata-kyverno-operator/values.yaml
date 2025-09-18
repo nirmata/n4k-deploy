@@ -22,7 +22,7 @@ image:
   tag:
   pullPolicy: Always
   pullSecrets:
-    registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker
+    registry: ghcr.io/vikashkaushik01
     name: ghcr-secret
     create: false  # For GitOps: create secret externally
     username: # Set via external secret
@@ -112,7 +112,7 @@ kyverno:
       enabled: true
       image:
         # -- (string) Image registry
-        registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker
+        registry: ghcr.io/vikashkaushik01
         # -- (string) Image repository
         repository: kyverno-cli
   #   groups:
@@ -246,7 +246,7 @@ kyverno:
   generatecontrollerExtraResources: []
   image:
     # -- Image repository
-    repository: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker
+    repository: ghcr.io/vikashkaushik01
     # -- Image tag
     tag: v1.12.6-n4k.nirmata.2
 
@@ -494,7 +494,7 @@ crds:
 
     image:
       # -- (string) Image registry
-      registry: artifactory.f1.novartis.net/to-ddi-diu-zephyr-docker
+      registry: ghcr.io/vikashkaushik01
       # -- (string) Image repository
       repository: kyverno-cli
       # -- (string) Image tag
