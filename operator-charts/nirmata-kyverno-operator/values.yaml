@@ -359,7 +359,8 @@ cisAdapter:
       schedule: '"@weekly"'
 
 # Items after this are general chart parameters. Set/Modify as per need.
-imagePullSecrets: []
+imagePullSecrets:
+  - name: ghcr-secret
 nameOverride: ""
 fullnameOverride: ""
 
@@ -504,7 +505,8 @@ crds:
       pullPolicy: Always
 
     # -- Image pull secrets
-    imagePullSecrets: []
+    imagePullSecrets:
+  - name: ghcr-secret
     # - name: secretName
 
     # -- Security context for the pod
