@@ -1,0 +1,55 @@
+# Nirmata Kyverno Operator configuration for PUBLIC images - no authentication required
+
+# Use public GHCR images (no authentication required)
+image:
+  repository: ghcr.io/nirmata/nirmata-kyverno-operator
+  tag: ~  # Uses chart appVersion
+  pullPolicy: IfNotPresent
+  pullSecrets:
+    registry: ghcr.io
+    name: ""  # No secret needed for public images
+    create: false  # Don't create any pull secrets
+    username: ""
+    password: ""
+
+# Standard settings for demo/test environments  
+replicaCount: 1
+profile: "prod"
+
+# Kyverno component settings - all using public images
+kyverno:
+  createCR: true
+  enablePolicyExceptions: true
+  
+  # Admission controller settings
+  admissionController:
+    replicas: 1  # Reduced for demo
+    
+  # Background controller settings  
+  backgroundController:
+    replicas: 1  # Reduced for demo
+    
+  # Cleanup controller settings
+  cleanupController:
+    replicas: 1  # Reduced for demo
+    
+  # Reports controller settings
+  reportsController:
+    replicas: 1  # Reduced for demo
+
+# Enable webhook with default settings
+enableWebhook: true
+secureOperator: true
+kyvernoNamespace: kyverno
+
+# Certificate management by operator
+certManager: operator
+
+# No license secrets for public demo
+apiAndLicenseSecretExists: false
+
+# Basic RBAC settings
+rbac:
+  create: true
+  serviceAccount:
+    create: true

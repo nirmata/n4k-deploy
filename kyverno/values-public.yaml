@@ -1,0 +1,44 @@
+# Kyverno configuration for PUBLIC images - no authentication required
+global:
+  image:
+    # Use default registry (reg.kyverno.io) - public access
+    registry: ~
+  # NO imagePullSecrets needed for public images
+  imagePullSecrets: []
+
+# Ensure all components use public registries
+admissionController:
+  image:
+    registry: ~
+    # Uses reg.kyverno.io by default (public)
+  # No imagePullSecrets required
+  imagePullSecrets: []
+
+backgroundController:
+  image:
+    registry: ~
+    # Uses reg.kyverno.io by default (public)
+  # No imagePullSecrets required  
+  imagePullSecrets: []
+
+cleanupController:
+  image:
+    registry: ~
+    # Uses reg.kyverno.io by default (public)
+  # No imagePullSecrets required
+  imagePullSecrets: []
+
+reportsController:
+  image:
+    registry: ~
+    # Uses reg.kyverno.io by default (public) 
+  # No imagePullSecrets required
+  imagePullSecrets: []
+
+# Performance settings for demo/test environments
+replicaCount: 1
+
+# Enable policy exceptions
+features:
+  policyExceptions:
+    enabled: true
