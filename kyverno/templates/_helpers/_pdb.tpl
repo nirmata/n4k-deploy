@@ -3,8 +3,10 @@
 {{- define "kyverno.pdb.apiVersion" -}}
 {{- if .Values.apiVersionOverride.podDisruptionBudget -}}
   {{- .Values.apiVersionOverride.podDisruptionBudget -}}
-{{- else -}}
+{{- else if .Capabilities.APIVersions.Has "policy/v1/PodDisruptionBudget" -}}
   policy/v1
+{{- else -}}
+  policy/v1beta1
 {{- end -}}
 {{- end -}}
 
@@ -17,8 +19,5 @@ minAvailable: {{ default 1 .minAvailable }}
 {{- end }}
 {{- if .maxUnavailable }}
 maxUnavailable: {{ .maxUnavailable }}
-{{- end }}
-{{- if .unhealthyPodEvictionPolicy }}
-unhealthyPodEvictionPolicy: {{ .unhealthyPodEvictionPolicy }}
 {{- end }}
 {{- end -}}

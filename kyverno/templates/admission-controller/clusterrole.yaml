@@ -33,10 +33,6 @@ rules:
       - customresourcedefinitions
     verbs:
       - get
-      {{- if .Values.admissionController.crdWatcher | default .Values.global.crdWatcher }}
-      - list
-      - watch
-      {{- end }}
   - apiGroups:
       - admissionregistration.k8s.io
     resources:
@@ -56,6 +52,13 @@ rules:
       - watch
       - deletecollection
   - apiGroups:
+      - apiregistration.k8s.io
+    resources:
+      - apiservices
+    verbs:
+      - get
+      - list
+  - apiGroups:
       - rbac.authorization.k8s.io
     resources:
       - roles
@@ -63,7 +66,6 @@ rules:
       - rolebindings
       - clusterrolebindings
     verbs:
-      - get
       - list
       - watch
   - apiGroups:
@@ -77,6 +79,7 @@ rules:
       - updaterequests/status
       - globalcontextentries
       - globalcontextentries/status
+      - policyexceptions
     verbs:
       - create
       - delete
@@ -86,48 +89,6 @@ rules:
       - update
       - watch
       - deletecollection
-  - apiGroups:
-      - kyverno.io
-    resources:
-      - policyexceptions
-    verbs:
-      - create
-      - get
-      - list
-      - patch
-      - update
-      - watch
-  - apiGroups:
-      - policies.kyverno.io
-    resources:
-      - validatingpolicies
-      - validatingpolicies/status
-      - imagevalidatingpolicies
-      - imagevalidatingpolicies/status
-      - generatingpolicies
-      - generatingpolicies/status
-      - mutatingpolicies
-      - mutatingpolicies/status
-    verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
-      - deletecollection
-  - apiGroups:
-      - policies.kyverno.io
-    resources:
-      - policyexceptions
-    verbs:
-      - create
-      - get
-      - list
-      - patch
-      - update
-      - watch
   - apiGroups:
       - reports.kyverno.io
     resources:
@@ -177,6 +138,7 @@ rules:
       - ''
     resources:
       - configmaps
+      - pods
       - namespaces
     verbs:
       - get

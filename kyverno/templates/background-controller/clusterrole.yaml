@@ -27,6 +27,13 @@ rules:
     verbs:
       - get
   - apiGroups:
+      - apiregistration.k8s.io
+    resources:
+      - apiservices
+    verbs:
+      - get
+      - list
+  - apiGroups:
       - kyverno.io
     resources:
       - policies
@@ -48,36 +55,11 @@ rules:
       - watch
       - deletecollection
   - apiGroups:
-      - policies.kyverno.io
-    resources:
-      - generatingpolicies
-      - mutatingpolicies
-      - policyexceptions
-    verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
-      - deletecollection
-  - apiGroups:
-      - policies.kyverno.io
-    resources:
-      - policyexceptions
-    verbs:
-      - create
-      - get
-      - list
-      - patch
-      - update
-      - watch
-  - apiGroups:
       - ''
     resources:
       - namespaces
       - configmaps
+      - pods
     verbs:
       - get
       - list
