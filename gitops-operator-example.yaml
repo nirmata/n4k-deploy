@@ -1,0 +1,74 @@
+# GitOps Application for Nirmata Kyverno Operator 0.8.8
+# This fixes the errors you encountered
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n4k-operator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # CORRECT repository configuration
+    repoURL: https://github.com/nirmata/n4k-deploy.git
+    targetRevision: helm-repo-support-ok
+    
+    # OPTION 1: Use source chart directory (recommended)
+    path: nirmata-kyverno-operator
+    helm:
+      releaseName: n4k-operator  # FIXES: "must either provide a name" error
+      valueFiles:
+        - values-public.yaml
+      
+    # OPTION 2: Use packaged chart (alternative)
+    # chart: nirmata-kyverno-operator
+    # helm:
+    #   releaseName: n4k-operator
+    #   values: |
+    #     # Your custom values here
+    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nirmata-system
+  
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
+---
+# Alternative: Using Helm repository approach
+apiVersion: argoproj.io/v1alpha1  
+kind: Application
+metadata:
+  name: n4k-operator-helm-repo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/n4k-deploy.git
+    targetRevision: helm-repo-support-ok
+    chart: nirmata-kyverno-operator
+    helm:
+      releaseName: n4k-operator
+      version: "0.8.8"
+      values: |
+        # Public image configuration
+        image:
+          repository: ghcr.io/nirmata/nirmata-kyverno-operator
+          pullSecrets:
+            create: false
+        replicaCount: 1
+        
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nirmata-system
+    
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
